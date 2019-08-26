@@ -51,7 +51,8 @@ while (answerArray > 0) { // создаем цикл, если длига ран
 
     alert(questionArray.join(" ")); // делаем его строкой через join
 
-    let question = prompt("Угадайте букву или нажмите Отмена для выхода из игры");
+    let question = prompt("Угадайте букву или нажмите Отмена для выхода из игры").toLowerCase();
+    
     if (question === null) { // если человек нажмет отмена - игра заканчивается
         break;
     } else if (question.length !== 1) { // если длина угаданной буквы не равно 1, сообщить ему об этом
