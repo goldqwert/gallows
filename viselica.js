@@ -40,31 +40,37 @@ let words = [
 
 let word = words[Math.floor(Math.random() * words.length)]; // выбирает рандомное число 
 
-let questionArray = []; // создаем итоговый массив, которому задаем *_* соответствует кол-ву букв в слове
+let answerMass = []; // создаем итоговый массив, которому задаем *_* соответствует кол-ву букв в слове
 for (i = 0; i < word.length; i++) {
-    questionArray[i] = "_";
+    answerMass[i] = "_";
 }
 
-let answerArray = word.length; // cоздаем переменную, длина рандомного слова
+let lengthRandomWord = word.length; // cоздаем переменную, длина рандомного слова
+let health = 20;
 
-while (answerArray > 0) { // создаем цикл, если длига рандомного слова > 0, то алертаем итоговый массив 
+while (lengthRandomWord > 0 && health > 0) { // создаем цикл, если длига рандомного слова > 0, то алертаем итоговый массив 
 
-    alert(questionArray.join(" ")); // делаем его строкой через join
+    alert(answerMass.join(" ")); // делаем его строкой через join
 
     let question = prompt("Угадайте букву или нажмите Отмена для выхода из игры").toLowerCase();
-    
+
     if (question === null) { // если человек нажмет отмена - игра заканчивается
         break;
     } else if (question.length !== 1) { // если длина угаданной буквы не равно 1, сообщить ему об этом
         alert("Пожалуйста, введите только одну букву.");
     } else {
+        health--;
         for (let j = 0; j < word.length; j++) { // 
-            if (word[j] === question) { // проверяем совпадает ли буква с ответом игрока
-                questionArray[j] = question;
-                answerArray--;
+            if (word[j] === question && answerMass[j] === "_") { // проверяем совпадает ли буква с ответом игрока
+                answerMass[j] = question;
+                lengthRandomWord--;
             }
         }
     }
 }
-alert(questionArray.join(" "));
-alert("Было загадано слово " + word);
+alert(answerMass.join(" "));
+if (health > 0) {
+    alert("Было загадано слово " + word);
+} else {
+alert("Вы использовали слишком много попыток и проиграли!");
+}
